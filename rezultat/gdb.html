@@ -735,11 +735,11 @@ software in general.  We will miss him.
   <li><a id="toc-Command-Interpreters" href="#Interpreters">24 Command Interpreters</a></li>
   <li><a id="toc-GDB-Text-User-Interface" href="#TUI">25 <small>GDB</small> Text User Interface</a>
   <ul class="no-bullet">
-    <li><a id="toc-TUI-Overview-1" href="#TUI-Overview">25.1 TUI Overview</a></li>
-    <li><a id="toc-TUI-Key-Bindings" href="#TUI-Keys">25.2 TUI Key Bindings</a></li>
-    <li><a id="toc-TUI-Single-Key-Mode-1" href="#TUI-Single-Key-Mode">25.3 TUI Single Key Mode</a></li>
-    <li><a id="toc-TUI_002dspecific-Commands" href="#TUI-Commands">25.4 TUI-specific Commands</a></li>
-    <li><a id="toc-TUI-Configuration-Variables" href="#TUI-Configuration">25.5 TUI Configuration Variables</a></li>
+    <li><a id="toc-TUI-Obzor" href="#TUI-Overview">25.1 TUI Обзор</a></li>
+    <li><a id="toc-TUI-Privyazki-Klavish" href="#TUI-Keys">25.2 TUI Привязки Клавиш</a></li>
+    <li><a id="toc-Rezhim-Odnoklvishnoi-Privyazki-Kliucha-TUI" href="#TUI-Single-Key-Mode">25.3 Режим Одноклвишной Привязки Ключа TUI</a></li>
+    <li><a id="toc-TUI_002dspecifichnye-Komandy" href="#TUI-Commands">25.4 TUI-специфичные Команды</a></li>
+    <li><a id="toc-Peremennye-konfiguracii-TUI" href="#TUI-Configuration">25.5 Переменные конфигурации TUI</a></li>
   </ul></li>
   <li><a id="toc-Using-GDB-under-GNU-Emacs" href="#Emacs">26 Using <small>GDB</small> under <small>GNU</small> Emacs</a></li>
   <li><a id="toc-The-GDB_002fMI-Interface" href="#GDB_002fMI">27 The <small>GDB/MI</small> Interface</a>
@@ -42223,52 +42223,51 @@ enable</code> or <kbd>C-x C-a</kbd>.  See <a href="#TUI-Commands">TUI Commands</
 <p>
 Next: <a href="#TUI-Keys" accesskey="n" rel="next">TUI Keys</a>, Up: <a href="#TUI" accesskey="u" rel="up">TUI</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Concept-Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="TUI-Overview-1"></span><h3 class="section">25.1 TUI Overview</h3>
+<span id="TUI-Obzor"></span><h3 class="section">25.1 TUI Обзор</h3>
 
-<p>In TUI mode, <small>GDB</small> can display several text windows:
+<p>В режиме TUI <small>GDB</small> может отображать несколько текстовых окон:
 </p>
 <dl compact="compact">
 <dt><em>command</em></dt>
-<dd><p>This window is the <small>GDB</small> command window with the <small>GDB</small>
-prompt and the <small>GDB</small> output.  The <small>GDB</small> input is still
-managed using readline.
+<dd><p>Это окно представляет собой командное окно <small>GDB</small> с приглашением
+<small>GDB</small> и выводом <small>GDB</small>.  Ввод <small>GDB</small> по-прежнему
+управляется с помощью readline.
 </p>
 </dd>
 <dt><em>source</em></dt>
-<dd><p>The source window shows the source file of the program.  The current
-line and active breakpoints are displayed in this window.
+<dd><p>В исходном окне отображается исходный файл программы.  В этом окне
+отображаются текущая строка и активные точки останова.
 </p>
 </dd>
 <dt><em>assembly</em></dt>
-<dd><p>The assembly window shows the disassembly output of the program.
+<dd><p>Окно сборки показывает вывод дизассемблирования программы.
 </p>
 </dd>
 <dt><em>register</em></dt>
-<dd><p>This window shows the processor registers.  Registers are highlighted
-when their values change.
+<dd><p>В этом окне отображаются регистры процессора.  Регистры подсвечиваются при
+изменении их значений.
 </p></dd>
 </dl>
 
-<p>The source and assembly windows show the current program position
-by highlighting the current line and marking it with a &lsquo;<samp>&gt;</samp>&rsquo; marker.
-Breakpoints are indicated with two markers.  The first marker
-indicates the breakpoint type:
+<p>Окна исходного кода и сборки показывают текущую позицию программы, выделяя
+текущую строку и отмечая ее маркером &lsquo;<samp>&gt;</samp>&rsquo;.  Точки останова обозначены
+двумя маркерами.  Первый маркер указывает тип точки останова:
 </p>
 <dl compact="compact">
 <dt><code>B</code></dt>
-<dd><p>Breakpoint which was hit at least once.
+<dd><p>Точка останова, которая была достигнута хотя бы один раз.
 </p>
 </dd>
 <dt><code>b</code></dt>
-<dd><p>Breakpoint which was never hit.
+<dd><p>Точка останова, которая ещё ни разу не была достигнута.
 </p>
 </dd>
 <dt><code>H</code></dt>
-<dd><p>Hardware breakpoint which was hit at least once.
+<dd><p>Аппаратная точка останова, которая была достигнута хотя бы раз
 </p>
 </dd>
 <dt><code>h</code></dt>
-<dd><p>Hardware breakpoint which was never hit.
+<dd><p>Аппаратная точка останова, которая ещё ни разу не была достигнута.
 </p></dd>
 </dl>
 
@@ -42276,63 +42275,61 @@ indicates the breakpoint type:
 </p>
 <dl compact="compact">
 <dt><code>+</code></dt>
-<dd><p>Breakpoint is enabled.
+<dd><p>Точка останова включена.
 </p>
 </dd>
 <dt><code>-</code></dt>
-<dd><p>Breakpoint is disabled.
+<dd><p>Точка останова отключена.
 </p></dd>
 </dl>
 
-<p>The source, assembly and register windows are updated when the current
-thread changes, when the frame changes, or when the program counter
-changes.
+<p>Окна источника, сборки и регистра обновляются при изменении текущего потока,
+при изменении кадра или при изменении счетчика программы.
 </p>
-<p>These windows are not all visible at the same time.  The command
-window is always visible.  The others can be arranged in several
-layouts:
+<p>Не все эти окна видны одновременно.  Командное окно всегда видно.  Остальные
+можно расположить в нескольких схемах:
 </p>
 <ul>
-<li> source only,
+<li> только источник,
 
-</li><li> assembly only,
+</li><li> только сборка,
 
-</li><li> source and assembly,
+</li><li> источник и сборка,
 
-</li><li> source and registers, or
+</li><li> источник и регистры, или
 
-</li><li> assembly and registers.
+</li><li> сборка и регистры.
 </li></ul>
 
-<p>These are the standard layouts, but other layouts can be defined.
+<p>Это стандартные макеты, но можно определить и другие макеты.
 </p>
-<p>A status line above the command window shows the following information:
+<p>В строке состояния над окном команд отображается следующая информация:
 </p>
 <dl compact="compact">
 <dt><em>target</em></dt>
-<dd><p>Indicates the current <small>GDB</small> target.
+<dd><p>Указывает текущую цель <small>GDB</small>.
 (see <a href="#Targets">Specifying a Debugging Target</a>).
 </p>
 </dd>
 <dt><em>process</em></dt>
-<dd><p>Gives the current process or thread number.
-When no process is being debugged, this field is set to <code>No process</code>.
+<dd><p>Предоставляет номер текущего процесса или потока.
+Когда ни один процесс не отлаживается, в этом поле устанавливается значение
+<code>No process</code>.
 </p>
 </dd>
 <dt><em>function</em></dt>
-<dd><p>Gives the current function name for the selected frame.
-The name is demangled if demangling is turned on (see <a href="#Print-Settings">Print Settings</a>).
-When there is no symbol corresponding to the current program counter,
-the string <code>??</code> is displayed.
+<dd><p>Дает текущее имя функции для выбранного фрейма.  Имя расширяется, если
+расширение включено (see <a href="#Print-Settings">Print Settings</a>).  Когда нет символа,
+соответствующего текущему счетчику программы, отображается строка <code>??</code>.
 </p>
 </dd>
 <dt><em>line</em></dt>
-<dd><p>Indicates the current line number for the selected frame.
-When the current line number is not known, the string <code>??</code> is displayed.
+<dd><p>Указывает текущий номер строки для выбранного кадра.  Если текущий номер
+строки неизвестен, отображается строка <code>??</code>.
 </p>
 </dd>
 <dt><em>pc</em></dt>
-<dd><p>Indicates the current program counter address.
+<dd><p>Указывает адрес текущего программного счетчика.
 </p></dd>
 </dl>
 
@@ -42341,13 +42338,13 @@ When the current line number is not known, the string <code>??</code> is display
 <p>
 Next: <a href="#TUI-Single-Key-Mode" accesskey="n" rel="next">TUI Single Key Mode</a>, Previous: <a href="#TUI-Overview" accesskey="p" rel="prev">TUI Overview</a>, Up: <a href="#TUI" accesskey="u" rel="up">TUI</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Concept-Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="TUI-Key-Bindings"></span><h3 class="section">25.2 TUI Key Bindings</h3>
+<span id="TUI-Privyazki-Klavish"></span><h3 class="section">25.2 TUI Привязки Клавиш</h3>
 <span id="index-TUI-key-bindings"></span>
 
-<p>The TUI installs several key bindings in the readline keymaps
+<p>TUI устанавливает несколько привязок клавиш в раскладки чтения readline.
 (see <a href="#Command-Line-Editing">Command Line Editing</a>).
-The following key bindings are installed for both TUI mode and the
-<small>GDB</small> standard mode.
+Следующие привязки клавиш установлены как для режима TUI, так и для
+стандартного режима <small>GDB</small>.
 </p>
 <dl compact="compact">
 <dd><span id="index-C_002dx-C_002da"></span>
@@ -42359,48 +42356,47 @@ The following key bindings are installed for both TUI mode and the
 <dd><span id="index-C_002dx-A"></span>
 </dd>
 <dt><kbd>C-x A</kbd></dt>
-<dd><p>Enter or leave the TUI mode.  When leaving the TUI mode,
-the curses window management stops and <small>GDB</small> operates using
-its standard mode, writing on the terminal directly.  When reentering
-the TUI mode, control is given back to the curses windows.
-The screen is then refreshed.
+<dd><p>Вход или выход из режима TUI.  При выходе из режима TUI управление
+окнами curses прекращается, и <small>GDB</small> работает в стандартном режиме,
+записывая данные непосредственно в терминал.  При повторном входе в режим
+TUI управление возвращается окнам curses.  Затем экран обновится.
 </p>
-<p>This key binding uses the bindable Readline function
+<p>Эта привязка клавиш использует связываемую функцию Readline
 <code>tui-switch-mode</code>.
 </p>
 <span id="index-C_002dx-1"></span>
 </dd>
 <dt><kbd>C-x 1</kbd></dt>
-<dd><p>Use a TUI layout with only one window.  The layout will
-either be &lsquo;<samp>source</samp>&rsquo; or &lsquo;<samp>assembly</samp>&rsquo;.  When the TUI mode
-is not active, it will switch to the TUI mode.
+<dd><p>Использовать макет TUI только с одним окном.  Макет будет либо
+&lsquo;<samp>source (источник)</samp>&rsquo; либо &lsquo;<samp>assembly (сборка)</samp>&rsquo;.  Когда режим TUI не
+активен, он перейдет в режим TUI.
 </p>
-<p>Think of this key binding as the Emacs <kbd>C-x 1</kbd> binding.
+<p>Думайте об этой привязке клавиш как о привязке Emacs <kbd>C-x 1</kbd>.
 </p>
-<p>This key binding uses the bindable Readline function
+<p>Эта привязка клавиш использует связываемую функцию Readline
 <code>tui-delete-other-windows</code>.
 </p>
 <span id="index-C_002dx-2"></span>
 </dd>
 <dt><kbd>C-x 2</kbd></dt>
-<dd><p>Use a TUI layout with at least two windows.  When the current
-layout already has two windows, the next layout with two windows is used.
-When a new layout is chosen, one window will always be common to the
-previous layout and the new one.
+<dd><p>Используйте макет TUI как минимум с двумя окнами.  Если в текущем макете уже
+есть два окна, используется следующий макет с двумя окнами.  Когда
+выбирается новый макет, одно окно всегда будет общим для предыдущего и
+нового макета.
 </p>
-<p>Think of it as the Emacs <kbd>C-x 2</kbd> binding.
+<p>Думайте об этом как о привязке Emacs <kbd>C-x 2</kbd>.
 </p>
-<p>This key binding uses the bindable Readline function
+<p>Эта привязка клавиш использует привязываемую функцию Readline
 <code>tui-change-windows</code>.
 </p>
 <span id="index-C_002dx-o"></span>
 </dd>
 <dt><kbd>C-x o</kbd></dt>
-<dd><p>Change the active window.  The TUI associates several key bindings
-(like scrolling and arrow keys) with the active window.  This command
-gives the focus to the next TUI window.
+<dd><p>Измените активное окно.  TUI связывает несколько привязок клавиш (например,
+прокрутка и клавиши со стрелками) с активным окном.  Эта команда дает фокус
+следующему окну TUI.
 </p>
-<p>Think of it as the Emacs <kbd>C-x o</kbd> binding.
+<p>Думайте об этом как о привязке Emacs <kbd>C-x o</kbd>.
 </p>
 <p>This key binding uses the bindable Readline function
 <code>tui-other-window</code>.
@@ -42408,359 +42404,353 @@ gives the focus to the next TUI window.
 <span id="index-C_002dx-s"></span>
 </dd>
 <dt><kbd>C-x s</kbd></dt>
-<dd><p>Switch in and out of the TUI SingleKey mode that binds single
-keys to <small>GDB</small> commands (see <a href="#TUI-Single-Key-Mode">TUI Single Key Mode</a>).
+<dd><p>Включение и выключение режима TUI SingleKey, который связывает отдельные
+клавиши с командами <small>GDB</small> (see <a href="#TUI-Single-Key-Mode">TUI Single Key Mode</a>).
 </p>
-<p>This key binding uses the bindable Readline function
+<p>Эта привязка клавиш использует связываемую функцию Readline
 <code>next-keymap</code>.
 </p></dd>
 </dl>
 
-<p>The following key bindings only work in the TUI mode:
+<p>Следующие привязки клавиш работают только в режиме TUI:
 </p>
 <dl compact="compact">
 <dd><span id="index-PgUp"></span>
 </dd>
 <dt><tt class="key">PgUp</tt></dt>
-<dd><p>Scroll the active window one page up.
+<dd><p>Прокрутите активное окно на одну страницу вверх.
 </p>
 <span id="index-PgDn"></span>
 </dd>
 <dt><tt class="key">PgDn</tt></dt>
-<dd><p>Scroll the active window one page down.
+<dd><p>Прокрутите активное окно на одну страницу вниз.
 </p>
 <span id="index-Up"></span>
 </dd>
 <dt><tt class="key">Up</tt></dt>
-<dd><p>Scroll the active window one line up.
+<dd><p>Прокрутите активное окно на одну строку вверх.
 </p>
 <span id="index-Down"></span>
 </dd>
 <dt><tt class="key">Down</tt></dt>
-<dd><p>Scroll the active window one line down.
+<dd><p>Прокрутите активное окно на одну строку вниз.
 </p>
 <span id="index-Left"></span>
 </dd>
 <dt><tt class="key">Left</tt></dt>
-<dd><p>Scroll the active window one column left.
+<dd><p>Прокрутите активное окно на одну колонку влево.
 </p>
 <span id="index-Right"></span>
 </dd>
 <dt><tt class="key">Right</tt></dt>
-<dd><p>Scroll the active window one column right.
+<dd><p>Прокрутите активное окно на одну колонку вправо.
 </p>
 <span id="index-C_002dL"></span>
 </dd>
 <dt><kbd>C-L</kbd></dt>
-<dd><p>Refresh the screen.
+<dd><p>Обновите экран.
 </p></dd>
 </dl>
 
-<p>Because the arrow keys scroll the active window in the TUI mode, they
-are not available for their normal use by readline unless the command
-window has the focus.  When another window is active, you must use
-other readline key bindings such as <kbd>C-p</kbd>, <kbd>C-n</kbd>, <kbd>C-b</kbd>
-and <kbd>C-f</kbd> to control the command window.
+<p>Поскольку клавиши со стрелками прокручивают активное окно в режиме TUI, они
+недоступны для обычного использования с помощью Readline, если в окне
+командной строки нет фокуса.  Когда активно другое окно, требуется
+использовать другие привязки клавиш readline, такие как <kbd>C-p</kbd>,
+<kbd>C-n</kbd>, <kbd>C-b</kbd> и <kbd>C-f</kbd>, для управления командной строкой.
 </p>
 <hr>
 <span id="TUI-Single-Key-Mode"></span><div class="header">
 <p>
 Next: <a href="#TUI-Commands" accesskey="n" rel="next">TUI Commands</a>, Previous: <a href="#TUI-Keys" accesskey="p" rel="prev">TUI Keys</a>, Up: <a href="#TUI" accesskey="u" rel="up">TUI</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Concept-Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="TUI-Single-Key-Mode-1"></span><h3 class="section">25.3 TUI Single Key Mode</h3>
+<span id="Rezhim-Odnoklvishnoi-Privyazki-Kliucha-TUI"></span><h3 class="section">25.3 Режим Одноклвишной Привязки Ключа TUI</h3>
 <span id="index-TUI-single-key-mode"></span>
 
-<p>The TUI also provides a <em>SingleKey</em> mode, which binds several
-frequently used <small>GDB</small> commands to single keys.  Type <kbd>C-x s</kbd> to
-switch into this mode, where the following key bindings are used:
+<p>TUI также предоставляет режим <em>SingleKey</em>, который связывает несколько
+часто используемых команд <small>GDB</small> с отдельными клавишами.  Введите
+<kbd>C-x s</kbd>, чтобы переключиться в этот режим, в котором используются
+следующие привязки клавиш:
 </p>
 <dl compact="compact">
 <dd><span id="index-c-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>c</kbd></dt>
-<dd><p>continue
+<dd><p>продолжить
 </p>
 <span id="index-d-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>d</kbd></dt>
-<dd><p>down
+<dd><p>вниз
 </p>
 <span id="index-f-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>f</kbd></dt>
-<dd><p>finish
+<dd><p>финиш
 </p>
 <span id="index-n-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>n</kbd></dt>
-<dd><p>next
+<dd><p>следующий
 </p>
 <span id="index-o-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>o</kbd></dt>
-<dd><p>nexti.  The shortcut letter &lsquo;<samp>o</samp>&rsquo; stands for &ldquo;step Over&rdquo;.
+<dd><p>nexti.  Сокращенная буква &lsquo;<samp>o</samp>&rsquo; означает &ldquo;шаг Вперёд&rdquo;.
 </p>
 <span id="index-q-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>q</kbd></dt>
-<dd><p>exit the SingleKey mode.
+<dd><p>выйти из режима SingleKey.
 </p>
 <span id="index-r-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>r</kbd></dt>
-<dd><p>run
+<dd><p>запуск
 </p>
 <span id="index-s-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>s</kbd></dt>
-<dd><p>step
+<dd><p>шаг
 </p>
 <span id="index-i-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>i</kbd></dt>
-<dd><p>stepi.  The shortcut letter &lsquo;<samp>i</samp>&rsquo; stands for &ldquo;step Into&rdquo;.
+<dd><p>stepi.  Сокращенная буква &lsquo;<samp>i</samp>&rsquo; означает &ldquo;шаг внутрь&rdquo;.
 </p>
 <span id="index-u-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>u</kbd></dt>
-<dd><p>up
+<dd><p>вверх
 </p>
 <span id="index-v-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>v</kbd></dt>
-<dd><p>info locals
+<dd><p>локальная информация
 </p>
 <span id="index-w-_0028SingleKey-TUI-key_0029"></span>
 </dd>
 <dt><kbd>w</kbd></dt>
-<dd><p>where
+<dd><p>где
 </p></dd>
 </dl>
 
-<p>Other keys temporarily switch to the <small>GDB</small> command prompt.
-The key that was pressed is inserted in the editing buffer so that
-it is possible to type most <small>GDB</small> commands without interaction
-with the TUI SingleKey mode.  Once the command is entered the TUI
-SingleKey mode is restored.  The only way to permanently leave
-this mode is by typing <kbd>q</kbd> or <kbd>C-x s</kbd>.
+<p>Другие клавиши временно переключаются в командную строку <small>GDB</small>.
+Нажатая клавиша вставляется в буфер редактирования, так что можно вводить
+большинство команд <small>GDB</small> без взаимодействия с режимом TUI SingleKey.
+После ввода команды восстанавливается режим TUI SingleKey.  Единственный
+способ навсегда выйти из этого режима - набрать <kbd>q</kbd> или <kbd>C-x s</kbd>.
 </p>
 <span id="index-SingleKey-keymap-name"></span>
-<p>If <small>GDB</small> was built with Readline 8.0 or later, the TUI
-SingleKey keymap will be named &lsquo;<samp>SingleKey</samp>&rsquo;.  This can be used in
-<samp>.inputrc</samp> to add additional bindings to this keymap.
+<p>Если <small>GDB</small> был собран с помощью Readline 8.0 или новее, раскладка TUI
+SingleKey будет называться &lsquo;<samp>SingleKey</samp>&rsquo;.  Это можно использовать в
+<samp>.inputrc</samp> для добавления дополнительных привязок к этой раскладке.
 </p>
 <hr>
 <span id="TUI-Commands"></span><div class="header">
 <p>
 Next: <a href="#TUI-Configuration" accesskey="n" rel="next">TUI Configuration</a>, Previous: <a href="#TUI-Single-Key-Mode" accesskey="p" rel="prev">TUI Single Key Mode</a>, Up: <a href="#TUI" accesskey="u" rel="up">TUI</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Concept-Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="TUI_002dspecific-Commands"></span><h3 class="section">25.4 TUI-specific Commands</h3>
+<span id="TUI_002dspecifichnye-Komandy"></span><h3 class="section">25.4 TUI-специфичные Команды</h3>
 <span id="index-TUI-commands"></span>
 
-<p>The TUI has specific commands to control the text windows.
-These commands are always available, even when <small>GDB</small> is not in
-the TUI mode.  When <small>GDB</small> is in the standard mode, most
-of these commands will automatically switch to the TUI mode.
+<p>В TUI есть специальные команды для управления текстовыми окнами.  Эти
+команды доступны всегда, даже если <small>GDB</small> не находится в режиме TUI.
+Когда <small>GDB</small> находится в стандартном режиме, большинство этих команд
+автоматически переключаются в режим TUI.
 </p>
-<p>Note that if <small>GDB</small>&rsquo;s <code>stdout</code> is not connected to a
-terminal, or <small>GDB</small> has been started with the machine interface
-interpreter (see <a href="#GDB_002fMI">The <small>GDB/MI</small> Interface</a>), most of
-these commands will fail with an error, because it would not be
-possible or desirable to enable curses window management.
+<p>Обратите внимание, что если <small>GDB</small>&rsquo;s <code>stdout</code> не подключен к
+терминалу или <small>GDB</small> был запущен с интерпретатором машинного
+интерфейса (see <a href="#GDB_002fMI">The <small>GDB/MI</small> Interface</a>), большинство этих
+команд завершится ошибкой, потому что было бы невозможно или нежелательно
+включить управление окнами curses.
 </p>
 <dl compact="compact">
 <dt><code>tui enable</code></dt>
 <dd><span id="index-tui-enable"></span>
-<p>Activate TUI mode.  The last active TUI window layout will be used if
-TUI mode has previously been used in the current debugging session,
-otherwise a default layout is used.
+<p>Активировать режим TUI. Последний активный макет окна TUI будет
+использоваться, если режим TUI ранее использовался в текущем сеансе отладки,
+в противном случае используется макет по умолчанию.
 </p>
 </dd>
 <dt><code>tui disable</code></dt>
 <dd><span id="index-tui-disable"></span>
-<p>Disable TUI mode, returning to the console interpreter.
+<p>Отключить режим TUI, вернувшись в консольный интерпретатор.
 </p>
 </dd>
 <dt><code>info win</code></dt>
 <dd><span id="index-info-win"></span>
-<p>List and give the size of all displayed windows.
+<p>Перечислить и указать размер всех отображаемых окон.
 </p>
 </dd>
 <dt><code>tui new-layout <var>name</var> <var>window</var> <var>weight</var> <span class="roman">[</span><var>window</var> <var>weight</var>&hellip;<span class="roman">]</span></code></dt>
 <dd><span id="index-tui-new_002dlayout"></span>
-<p>Create a new TUI layout.  The new layout will be named <var>name</var>, and
-can be accessed using the <code>layout</code> command (see below).
+<p>Создать новый макет TUI.  Новый макет будет называться <var>name</var>, и к нему
+можно будет получить доступ с помощью команды <code>layout</code> (см. Ниже).
 </p>
-<p>Each <var>window</var> parameter is either the name of a window to display,
-or a window description.  The windows will be displayed from top to
-bottom in the order listed.
+<p>Каждый параметр <var>window</var> - это либо имя отображаемого окна, либо его
+описание.  Окна будут отображаться сверху вниз в указанном порядке.
 </p>
-<p>The names of the windows are the same as the ones given to the
-<code>focus</code> command (see below); additional, the <code>status</code>
-window can be specified.  Note that, because it is of fixed height,
-the weight assigned to the status window is of no importance.  It is
-conventional to use &lsquo;<samp>0</samp>&rsquo; here.
+<p>Имена окон такие же, как и у команды <code>focus</code> (см. Ниже); Дополнительно
+можно указать окно <code>status</code>.  Обратите внимание, что, поскольку оно
+имеет фиксированную высоту, вес, присвоенное окну состояние, не имеет
+значения.  Обычно здесь используется &lsquo;<samp>0</samp>&rsquo;.
 </p>
-<p>A window description looks a bit like an invocation of <code>tui
-new-layout</code>, and is of the form
+<p>Описание окна немного похоже на вызов <code>tui new-layout</code> и имеет вид
 {<span class="roman">[</span><code>-horizontal</code><span class="roman">]</span><var>window</var> <var>weight</var> <span class="roman">[</span><var>window</var> <var>weight</var>&hellip;<span class="roman">]</span>}.
 </p>
-<p>This specifies a sub-layout.  If <code>-horizontal</code> is given, the
-windows in this description will be arranged side-by-side, rather than
-top-to-bottom.
+<p>Это определяет суб-макет.  Если задано <code>-horizontal</code>, окна в этом
+описании будут располагаться бок о бок, а не сверху вниз.
 </p>
-<p>Each <var>weight</var> is an integer.  It is the weight of this window
-relative to all the other windows in the layout.  These numbers are
-used to calculate how much of the screen is given to each window.
+<p>Каждый <var>weight</var> является целым числом.  Это вес этого окна по отношению
+ко всем остальным окнам в макете.  Эти числа используются для расчета того,
+какая часть экрана отводится каждому окну.
 </p>
-<p>For example:
+<p>Например:
 </p>
 <div class="example">
 <pre class="example">(gdb) tui new-layout example src 1 regs 1 status 0 cmd 1
 </pre></div>
 
-<p>Here, the new layout is called &lsquo;<samp>example</samp>&rsquo;.  It shows the source
-and register windows, followed by the status window, and then finally
-the command window.  The non-status windows all have the same weight,
-so the terminal will be split into three roughly equal sections.
+<p>Здесь новый макет называется &lsquo;<samp>example</samp>&rsquo;.  Он отображает окна источника и
+регистра, затем окно состояния и, наконец, окно команд.  Все окна без окна
+статуса имеют одинаковый вес, поэтому терминал будет разделен на три
+примерно равные части.
 </p>
-<p>Here is a more complex example, showing a horizontal layout:
+<p>Вот более сложный пример, показывающий горизонтальный макет:
 </p>
 <div class="example">
 <pre class="example">(gdb) tui new-layout example {-horizontal src 1 asm 1} 2 status 0 cmd 1
 </pre></div>
 
-<p>This will result in side-by-side source and assembly windows; with the
-status and command window being beneath these, filling the entire
-width of the terminal.  Because they have weight 2, the source and
-assembly windows will be twice the height of the command window.
+<p>Это приведет к параллельному расположению окон источника и сборки; с окном
+состояния и команд под ними, заполняя всю ширину терминала.  Поскольку они
+имеют вес 2, окна исходного кода и сборки будут в два раза больше высоты
+окна команд.
 </p>
 </dd>
 <dt><code>layout <var>name</var></code></dt>
 <dd><span id="index-layout"></span>
-<p>Changes which TUI windows are displayed.  The <var>name</var> parameter
-controls which layout is shown.  It can be either one of the built-in
-layout names, or the name of a layout defined by the user using
-<code>tui new-layout</code>.
+<p>Изменяет отображение окон TUI.  Параметр <var>name</var> управляет отображаемым
+макетом.  Это может быть либо одно из встроенных имен макета, либо имя
+макета, определенное пользователем с помощью <code>tui new-layout</code>.
 </p>
-<p>The built-in layouts are as follows:
+<p>Встроенные макеты следующие:
 </p>
 <dl compact="compact">
 <dt><code>next</code></dt>
-<dd><p>Display the next layout.
+<dd><p>Показать следующий макет.
 </p>
 </dd>
 <dt><code>prev</code></dt>
-<dd><p>Display the previous layout.
+<dd><p>Показать предыдущий макет.
 </p>
 </dd>
 <dt><code>src</code></dt>
-<dd><p>Display the source and command windows.
+<dd><p>Показать окно исходного кода и окно команд.
 </p>
 </dd>
 <dt><code>asm</code></dt>
-<dd><p>Display the assembly and command windows.
+<dd><p>Отобразите окна сборки и командного окна.
 </p>
 </dd>
 <dt><code>split</code></dt>
-<dd><p>Display the source, assembly, and command windows.
+<dd><p>Отобразите окна исходного кода, сборки и команд.
 </p>
 </dd>
 <dt><code>regs</code></dt>
-<dd><p>When in <code>src</code> layout display the register, source, and command
-windows.  When in <code>asm</code> or <code>split</code> layout display the
-register, assembler, and command windows.
+<dd><p>В макете <code>src</code> отображаются окна реестра, исходного кода и команд.  В
+макете <code>asm</code> или <code>split</code> отображаются окна реестра, ассемблера и
+команд.
 </p></dd>
 </dl>
 
 </dd>
 <dt><code>focus <var>name</var></code></dt>
 <dd><span id="index-focus"></span>
-<p>Changes which TUI window is currently active for scrolling.  The
-<var>name</var> parameter can be any of the following:
+<p>Изменяет, какое окно TUI в настоящее время активно для прокрутки.  Параметр
+<var>name</var> может быть любым из следующих:
 </p>
 <dl compact="compact">
 <dt><code>next</code></dt>
-<dd><p>Make the next window active for scrolling.
+<dd><p>Сделает следующее окно активным для прокрутки.
 </p>
 </dd>
 <dt><code>prev</code></dt>
-<dd><p>Make the previous window active for scrolling.
+<dd><p>Сделает предыдущее окно активным для прокрутки.
 </p>
 </dd>
 <dt><code>src</code></dt>
-<dd><p>Make the source window active for scrolling.
+<dd><p>Сделает исходное окно активным для прокрутки.
 </p>
 </dd>
 <dt><code>asm</code></dt>
-<dd><p>Make the assembly window active for scrolling.
+<dd><p>Сделает окно сборки активным для прокрутки.
 </p>
 </dd>
 <dt><code>regs</code></dt>
-<dd><p>Make the register window active for scrolling.
+<dd><p>Сделает окно реестра активным для прокрутки.
 </p>
 </dd>
 <dt><code>cmd</code></dt>
-<dd><p>Make the command window active for scrolling.
+<dd><p>Сделает командное окно активным для прокрутки.
 </p></dd>
 </dl>
 
 </dd>
 <dt><code>refresh</code></dt>
 <dd><span id="index-refresh"></span>
-<p>Refresh the screen.  This is similar to typing <kbd>C-L</kbd>.
+<p>Обновите экран.  Это похоже на ввод <kbd>C-L</kbd>.
 </p>
 </dd>
 <dt><code>tui reg <var>group</var></code></dt>
 <dd><span id="index-tui-reg"></span>
-<p>Changes the register group displayed in the tui register window to
-<var>group</var>.  If the register window is not currently displayed this
-command will cause the register window to be displayed.  The list of
-register groups, as well as their order is target specific. The
-following groups are available on most targets:
+<p>Изменяет группу регистров, отображаемую в окне регистров TUI, на
+<var>group</var>.  Если окно регистров в настоящее время не отображается, эта
+команда вызовет отображение окна регистров.  Список групп регистров, а также
+их порядок зависят от цели.  Для большинства целей доступны следующие
+группы:
 </p><dl compact="compact">
 <dt><code>next</code></dt>
-<dd><p>Repeatedly selecting this group will cause the display to cycle
-through all of the available register groups.
+<dd><p>Повторный выбор этой группы приведет к циклическому просмотру на дисплее
+всех доступных групп регистров.
 </p>
 </dd>
 <dt><code>prev</code></dt>
-<dd><p>Repeatedly selecting this group will cause the display to cycle
-through all of the available register groups in the reverse order to
-<var>next</var>.
+<dd><p>Повторный выбор этой группы приведет к тому, что будут циклическим перебором
+отображатся все доступные группы регистров в порядке, обратном <var>next</var>.
 </p>
 </dd>
 <dt><code>general</code></dt>
-<dd><p>Display the general registers.
+<dd><p>Отображение общих регистров.
 </p></dd>
 <dt><code>float</code></dt>
-<dd><p>Display the floating point registers.
+<dd><p>Отобразите регистры с плавающей точкой.
 </p></dd>
 <dt><code>system</code></dt>
-<dd><p>Display the system registers.
+<dd><p>Отобразите системные регистры.
 </p></dd>
 <dt><code>vector</code></dt>
-<dd><p>Display the vector registers.
+<dd><p>Отобразите регистры векторов.
 </p></dd>
 <dt><code>all</code></dt>
-<dd><p>Display all registers.
+<dd><p>Показать все регистры.
 </p></dd>
 </dl>
 
 </dd>
 <dt><code>update</code></dt>
 <dd><span id="index-update"></span>
-<p>Update the source window and the current execution point.
+<p>Обновите исходное окно и текущую точку выполнения.
 </p>
 </dd>
 <dt><code>winheight <var>name</var> +<var>count</var></code></dt>
 <dt><code>winheight <var>name</var> -<var>count</var></code></dt>
 <dd><span id="index-winheight"></span>
-<p>Change the height of the window <var>name</var> by <var>count</var>
-lines.  Positive counts increase the height, while negative counts
-decrease it.  The <var>name</var> parameter can be one of <code>src</code> (the
-source window), <code>cmd</code> (the command window), <code>asm</code> (the
-disassembly window), or <code>regs</code> (the register display window).
+<p>Измените высоту окна <var>name</var> на количество строк <var>count</var>.
+Положительные значения увеличивают высоту, а отрицательные - уменьшает.
+Параметр <var>name</var> может быть одним из <code>src</code> (окно исходного кода),
+<code>cmd</code> (окно командного интерпретартора), <code>asm</code> (окно сборки) или
+<code>regs</code> (окно отображения реестров).
 </p></dd>
 </dl>
 
@@ -42769,28 +42759,30 @@ disassembly window), or <code>regs</code> (the register display window).
 <p>
 Previous: <a href="#TUI-Commands" accesskey="p" rel="prev">TUI Commands</a>, Up: <a href="#TUI" accesskey="u" rel="up">TUI</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Concept-Index" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="TUI-Configuration-Variables"></span><h3 class="section">25.5 TUI Configuration Variables</h3>
+<span id="Peremennye-konfiguracii-TUI"></span><h3 class="section">25.5 Переменные конфигурации TUI</h3>
 <span id="index-TUI-configuration-variables"></span>
 
-<p>Several configuration variables control the appearance of TUI windows.
+<p>Несколько переменных конфигурации управляют внешним видом окон TUI.
 </p>
 <dl compact="compact">
 <dt><code>set tui border-kind <var>kind</var></code></dt>
 <dd><span id="index-set-tui-border_002dkind"></span>
-<p>Select the border appearance for the source, assembly and register windows.
-The possible values are the following:
+<p>Выбрать внешний вид границы для окон исходного кода, сборки и регистров.
+Возможные значения:
 </p><dl compact="compact">
 <dt><code>space</code></dt>
-<dd><p>Use a space character to draw the border.
+<dd><p>Использовать пробел, чтобы нарисовать границу.
 </p>
 </dd>
 <dt><code>ascii</code></dt>
-<dd><p>Use <small>ASCII</small> characters &lsquo;<samp>+</samp>&rsquo;, &lsquo;<samp>-</samp>&rsquo; and &lsquo;<samp>|</samp>&rsquo; to draw the border.
+<dd><p>Использовать символы <small>ASCII</small> &lsquo;<samp>+</samp>&rsquo;, &lsquo;<samp>-</samp>&rsquo; и &lsquo;<samp>|</samp>&rsquo; для рисования
+границы.
 </p>
 </dd>
 <dt><code>acs</code></dt>
-<dd><p>Use the Alternate Character Set to draw the border.  The border is
-drawn using character line graphics if the terminal supports them.
+<dd><p>Используйте альтернативный набор символов, чтобы нарисовать границу.
+Граница рисуется с использованием линейной графики, если терминал это
+поддерживает.
 </p></dd>
 </dl>
 
@@ -42800,35 +42792,35 @@ drawn using character line graphics if the terminal supports them.
 </dd>
 <dt><code>set tui active-border-mode <var>mode</var></code></dt>
 <dd><span id="index-set-tui-active_002dborder_002dmode"></span>
-<p>Select the display attributes for the borders of the inactive windows
-or the active window.  The <var>mode</var> can be one of the following:
+<p>Выбор атрибутов отображения для границ неактивных окон или активного окна.
+<var>mode</var> может быть одним из следующих:
 </p><dl compact="compact">
 <dt><code>normal</code></dt>
-<dd><p>Use normal attributes to display the border.
+<dd><p>Использовать обычные атрибуты для отображения границы.
 </p>
 </dd>
 <dt><code>standout</code></dt>
-<dd><p>Use standout mode.
+<dd><p>Использовать режим выделения.
 </p>
 </dd>
 <dt><code>reverse</code></dt>
-<dd><p>Use reverse video mode.
+<dd><p>Использовать режим обратного видео.
 </p>
 </dd>
 <dt><code>half</code></dt>
-<dd><p>Use half bright mode.
+<dd><p>Использовать режим половинной яркости.
 </p>
 </dd>
 <dt><code>half-standout</code></dt>
-<dd><p>Use half bright and standout mode.
+<dd><p>Использовать полуяркий и режим выделения.
 </p>
 </dd>
 <dt><code>bold</code></dt>
-<dd><p>Use extra bright or bold mode.
+<dd><p>Использовать очень яркий или жирный режим.
 </p>
 </dd>
 <dt><code>bold-standout</code></dt>
-<dd><p>Use extra bright or bold and standout mode.
+<dd><p>Используйте режим повышенной яркости или жирности и яркости.
 </p></dd>
 </dl>
 
@@ -42836,23 +42828,24 @@ or the active window.  The <var>mode</var> can be one of the following:
 <dt><code>set tui tab-width <var>nchars</var></code></dt>
 <dd><span id="index-set-tui-tab_002dwidth"></span>
 <span id="index-tabset"></span>
-<p>Set the width of tab stops to be <var>nchars</var> characters.  This
-setting affects the display of TAB characters in the source and
-assembly windows.
+<p>Установить ширину позиций табуляции, чтобы она составляла <var>nchars</var>
+символов.  Этот параметр влияет на отображение символов TAB в окнах
+исходного кода и сборки.
 </p>
 </dd>
 <dt><code>set tui compact-source <span class="roman">[</span>on<span class="roman">|</span>off<span class="roman">]</span></code></dt>
 <dd><span id="index-set-tui-compact_002dsource"></span>
-<p>Set whether the TUI source window is displayed in &ldquo;compact&rdquo; form.
-The default display uses more space for line numbers and starts the
-source text at the next tab stop; the compact display uses only as
-much space as is needed for the line numbers in the current file, and
-only a single space to separate the line numbers from the source.
+<p>Установить, будет ли окно исходного текста TUI отображаться в форме
+&ldquo;compact&rdquo;.  Отображение по умолчанию использует больше места для номеров
+строк и начинает исходный текст со следующей позиции табуляции; компактное
+отображение использует ровно столько места, сколько необходимо для номеров
+строк в текущем файле, и только один пробел для отделения номеров строк от
+текста исходного кода.
 </p></dd>
 </dl>
 
-<p>Note that the colors of the TUI borders can be controlled using the
-appropriate <code>set style</code> commands.  See <a href="#Output-Styling">Output Styling</a>.
+<p>Обратите внимание, что цветами границ TUI можно управлять с помощью
+соответствующих команд <code>set style</code>.  See <a href="#Output-Styling">Output Styling</a>.
 </p>
 <hr>
 <span id="Emacs"></span><div class="header">

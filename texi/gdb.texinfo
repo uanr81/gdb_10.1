@@ -4,7 +4,7 @@
 @c %**start of header
 @c makeinfo ignores cmds prev to setfilename, so its arg cannot make use
 @c of @set vars.  However, you can override filename with makeinfo -o.
-@c@setfilename gdb.info
+@setfilename gdb.info
 @c
 @c man begin INCLUDE
 @c @include gdb-cfg.texi
@@ -27862,122 +27862,119 @@ enable} or @kbd{C-x C-a}.  @xref{TUI Commands, ,TUI Commands}, and
 @ref{TUI Keys, ,TUI Key Bindings}.
 
 @node TUI Overview
-@section TUI Overview
+@section TUI Обзор
 
-In TUI mode, @value{GDBN} can display several text windows:
+В режиме TUI @value{GDBN} может отображать несколько текстовых окон:
 
 @table @emph
 @item command
-This window is the @value{GDBN} command window with the @value{GDBN}
-prompt and the @value{GDBN} output.  The @value{GDBN} input is still
-managed using readline.
+Это окно представляет собой командное окно @value{GDBN} с приглашением
+@value{GDBN} и выводом @value{GDBN}.  Ввод @value{GDBN} по-прежнему
+управляется с помощью readline.
 
 @item source
-The source window shows the source file of the program.  The current
-line and active breakpoints are displayed in this window.
+В исходном окне отображается исходный файл программы.  В этом окне
+отображаются текущая строка и активные точки останова.
 
 @item assembly
-The assembly window shows the disassembly output of the program.
+Окно сборки показывает вывод дизассемблирования программы.
 
 @item register
-This window shows the processor registers.  Registers are highlighted
-when their values change.
+В этом окне отображаются регистры процессора.  Регистры подсвечиваются при
+изменении их значений.
 @end table
 
-The source and assembly windows show the current program position
-by highlighting the current line and marking it with a @samp{>} marker.
-Breakpoints are indicated with two markers.  The first marker
-indicates the breakpoint type:
+Окна исходного кода и сборки показывают текущую позицию программы, выделяя
+текущую строку и отмечая ее маркером @samp{>}.  Точки останова обозначены
+двумя маркерами.  Первый маркер указывает тип точки останова:
 
 @table @code
 @item B
-Breakpoint which was hit at least once.
+Точка останова, которая была достигнута хотя бы один раз.
 
 @item b
-Breakpoint which was never hit.
+Точка останова, которая ещё ни разу не была достигнута.
 
 @item H
-Hardware breakpoint which was hit at least once.
+Аппаратная точка останова, которая была достигнута хотя бы раз
 
 @item h
-Hardware breakpoint which was never hit.
+Аппаратная точка останова, которая ещё ни разу не была достигнута.
 @end table
 
 The second marker indicates whether the breakpoint is enabled or not:
 
 @table @code
 @item +
-Breakpoint is enabled.
+Точка останова включена.
 
 @item -
-Breakpoint is disabled.
+Точка останова отключена.
 @end table
 
-The source, assembly and register windows are updated when the current
-thread changes, when the frame changes, or when the program counter
-changes.
+Окна источника, сборки и регистра обновляются при изменении текущего потока,
+при изменении кадра или при изменении счетчика программы.
 
-These windows are not all visible at the same time.  The command
-window is always visible.  The others can be arranged in several
-layouts:
+Не все эти окна видны одновременно.  Командное окно всегда видно.  Остальные
+можно расположить в нескольких схемах:
 
 @itemize @bullet
 @item
-source only,
+только источник,
 
 @item
-assembly only,
+только сборка,
 
 @item
-source and assembly,
+источник и сборка,
 
 @item
-source and registers, or
+источник и регистры, или
 
 @item
-assembly and registers.
+сборка и регистры.
 @end itemize
 
-These are the standard layouts, but other layouts can be defined.
+Это стандартные макеты, но можно определить и другие макеты.
 
-A status line above the command window shows the following information:
+В строке состояния над окном команд отображается следующая информация:
 
 @table @emph
 @item target
-Indicates the current @value{GDBN} target.
+Указывает текущую цель @value{GDBN}.
 (@pxref{Targets, ,Specifying a Debugging Target}).
 
 @item process
-Gives the current process or thread number.
-When no process is being debugged, this field is set to @code{No process}.
+Предоставляет номер текущего процесса или потока.
+Когда ни один процесс не отлаживается, в этом поле устанавливается значение
+@code{No process}.
 
 @item function
-Gives the current function name for the selected frame.
-The name is demangled if demangling is turned on (@pxref{Print Settings}).
-When there is no symbol corresponding to the current program counter,
-the string @code{??} is displayed.
+Дает текущее имя функции для выбранного фрейма.  Имя расширяется, если
+расширение включено (@pxref{Print Settings}).  Когда нет символа,
+соответствующего текущему счетчику программы, отображается строка @code{??}.
 
 @item line
-Indicates the current line number for the selected frame.
-When the current line number is not known, the string @code{??} is displayed.
+Указывает текущий номер строки для выбранного кадра.  Если текущий номер
+строки неизвестен, отображается строка @code{??}.
 
 @item pc
-Indicates the current program counter address.
+Указывает адрес текущего программного счетчика.
 @end table
 
 @node TUI Keys
-@section TUI Key Bindings
+@section TUI Привязки Клавиш
 @cindex TUI key bindings
 
-The TUI installs several key bindings in the readline keymaps
+TUI устанавливает несколько привязок клавиш в раскладки чтения readline.
 @ifset SYSTEM_READLINE
 (@pxref{Command Line Editing, , , rluserman, GNU Readline Library}).
 @end ifset
 @ifclear SYSTEM_READLINE
 (@pxref{Command Line Editing}).
 @end ifclear
-The following key bindings are installed for both TUI mode and the
-@value{GDBN} standard mode.
+Следующие привязки клавиш установлены как для режима TUI, так и для
+стандартного режима @value{GDBN}.
 
 @table @kbd
 @kindex C-x C-a
@@ -27986,418 +27983,414 @@ The following key bindings are installed for both TUI mode and the
 @itemx C-x a
 @kindex C-x A
 @itemx C-x A
-Enter or leave the TUI mode.  When leaving the TUI mode,
-the curses window management stops and @value{GDBN} operates using
-its standard mode, writing on the terminal directly.  When reentering
-the TUI mode, control is given back to the curses windows.
-The screen is then refreshed.
+Вход или выход из режима TUI.  При выходе из режима TUI управление
+окнами curses прекращается, и @value{GDBN} работает в стандартном режиме,
+записывая данные непосредственно в терминал.  При повторном входе в режим
+TUI управление возвращается окнам curses.  Затем экран обновится.
 
-This key binding uses the bindable Readline function
+Эта привязка клавиш использует связываемую функцию Readline
 @code{tui-switch-mode}.
 
 @kindex C-x 1
 @item C-x 1
-Use a TUI layout with only one window.  The layout will
-either be @samp{source} or @samp{assembly}.  When the TUI mode
-is not active, it will switch to the TUI mode.
+Использовать макет TUI только с одним окном.  Макет будет либо
+@samp{source (источник)} либо @samp{assembly (сборка)}.  Когда режим TUI не
+активен, он перейдет в режим TUI.
 
-Think of this key binding as the Emacs @kbd{C-x 1} binding.
+Думайте об этой привязке клавиш как о привязке Emacs @kbd{C-x 1}.
 
-This key binding uses the bindable Readline function
+Эта привязка клавиш использует связываемую функцию Readline
 @code{tui-delete-other-windows}.
 
 @kindex C-x 2
 @item C-x 2
-Use a TUI layout with at least two windows.  When the current
-layout already has two windows, the next layout with two windows is used.
-When a new layout is chosen, one window will always be common to the
-previous layout and the new one.
+Используйте макет TUI как минимум с двумя окнами.  Если в текущем макете уже
+есть два окна, используется следующий макет с двумя окнами.  Когда
+выбирается новый макет, одно окно всегда будет общим для предыдущего и
+нового макета.
 
-Think of it as the Emacs @kbd{C-x 2} binding.
+Думайте об этом как о привязке Emacs @kbd{C-x 2}.
 
-This key binding uses the bindable Readline function
+Эта привязка клавиш использует привязываемую функцию Readline
 @code{tui-change-windows}.
 
 @kindex C-x o
 @item C-x o
-Change the active window.  The TUI associates several key bindings
-(like scrolling and arrow keys) with the active window.  This command
-gives the focus to the next TUI window.
+Измените активное окно.  TUI связывает несколько привязок клавиш (например,
+прокрутка и клавиши со стрелками) с активным окном.  Эта команда дает фокус
+следующему окну TUI.
 
-Think of it as the Emacs @kbd{C-x o} binding.
+Думайте об этом как о привязке Emacs @kbd{C-x o}.
 
 This key binding uses the bindable Readline function
 @code{tui-other-window}.
 
 @kindex C-x s
 @item C-x s
-Switch in and out of the TUI SingleKey mode that binds single
-keys to @value{GDBN} commands (@pxref{TUI Single Key Mode}).
+Включение и выключение режима TUI SingleKey, который связывает отдельные
+клавиши с командами @value{GDBN} (@pxref{TUI Single Key Mode}).
 
-This key binding uses the bindable Readline function
+Эта привязка клавиш использует связываемую функцию Readline
 @code{next-keymap}.
 @end table
 
-The following key bindings only work in the TUI mode:
+Следующие привязки клавиш работают только в режиме TUI:
 
 @table @asis
 @kindex PgUp
 @item @key{PgUp}
-Scroll the active window one page up.
+Прокрутите активное окно на одну страницу вверх.
 
 @kindex PgDn
 @item @key{PgDn}
-Scroll the active window one page down.
+Прокрутите активное окно на одну страницу вниз.
 
 @kindex Up
 @item @key{Up}
-Scroll the active window one line up.
+Прокрутите активное окно на одну строку вверх.
 
 @kindex Down
 @item @key{Down}
-Scroll the active window one line down.
+Прокрутите активное окно на одну строку вниз.
 
 @kindex Left
 @item @key{Left}
-Scroll the active window one column left.
+Прокрутите активное окно на одну колонку влево.
 
 @kindex Right
 @item @key{Right}
-Scroll the active window one column right.
+Прокрутите активное окно на одну колонку вправо.
 
 @kindex C-L
 @item @kbd{C-L}
-Refresh the screen.
+Обновите экран.
 @end table
 
-Because the arrow keys scroll the active window in the TUI mode, they
-are not available for their normal use by readline unless the command
-window has the focus.  When another window is active, you must use
-other readline key bindings such as @kbd{C-p}, @kbd{C-n}, @kbd{C-b}
-and @kbd{C-f} to control the command window.
+Поскольку клавиши со стрелками прокручивают активное окно в режиме TUI, они
+недоступны для обычного использования с помощью Readline, если в окне
+командной строки нет фокуса.  Когда активно другое окно, требуется
+использовать другие привязки клавиш readline, такие как @kbd{C-p},
+@kbd{C-n}, @kbd{C-b} и @kbd{C-f}, для управления командной строкой.
 
 @node TUI Single Key Mode
-@section TUI Single Key Mode
+@section Режим Одноклвишной Привязки Ключа TUI
 @cindex TUI single key mode
 
-The TUI also provides a @dfn{SingleKey} mode, which binds several
-frequently used @value{GDBN} commands to single keys.  Type @kbd{C-x s} to
-switch into this mode, where the following key bindings are used:
+TUI также предоставляет режим @dfn{SingleKey}, который связывает несколько
+часто используемых команд @value{GDBN} с отдельными клавишами.  Введите
+@kbd{C-x s}, чтобы переключиться в этот режим, в котором используются
+следующие привязки клавиш:
 
 @table @kbd
 @kindex c @r{(SingleKey TUI key)}
 @item c
-continue
+продолжить
 
 @kindex d @r{(SingleKey TUI key)}
 @item d
-down
+вниз
 
 @kindex f @r{(SingleKey TUI key)}
 @item f
-finish
+финиш
 
 @kindex n @r{(SingleKey TUI key)}
 @item n
-next
+следующий
 
 @kindex o @r{(SingleKey TUI key)}
 @item o
-nexti.  The shortcut letter @samp{o} stands for ``step Over''.
+nexti.  Сокращенная буква @samp{o} означает ``шаг Вперёд''.
 
 @kindex q @r{(SingleKey TUI key)}
 @item q
-exit the SingleKey mode.
+выйти из режима SingleKey.
 
 @kindex r @r{(SingleKey TUI key)}
 @item r
-run
+запуск
 
 @kindex s @r{(SingleKey TUI key)}
 @item s
-step
+шаг
 
 @kindex i @r{(SingleKey TUI key)}
 @item i
-stepi.  The shortcut letter @samp{i} stands for ``step Into''.
+stepi.  Сокращенная буква @samp{i} означает ``шаг внутрь''.
 
 @kindex u @r{(SingleKey TUI key)}
 @item u
-up
+вверх
 
 @kindex v @r{(SingleKey TUI key)}
 @item v
-info locals
+локальная информация
 
 @kindex w @r{(SingleKey TUI key)}
 @item w
-where
+где
 @end table
 
-Other keys temporarily switch to the @value{GDBN} command prompt.
-The key that was pressed is inserted in the editing buffer so that
-it is possible to type most @value{GDBN} commands without interaction
-with the TUI SingleKey mode.  Once the command is entered the TUI
-SingleKey mode is restored.  The only way to permanently leave
-this mode is by typing @kbd{q} or @kbd{C-x s}.
+Другие клавиши временно переключаются в командную строку @value{GDBN}.
+Нажатая клавиша вставляется в буфер редактирования, так что можно вводить
+большинство команд @value{GDBN} без взаимодействия с режимом TUI SingleKey.
+После ввода команды восстанавливается режим TUI SingleKey.  Единственный
+способ навсегда выйти из этого режима - набрать @kbd{q} или @kbd{C-x s}.
 
 @cindex SingleKey keymap name
-If @value{GDBN} was built with Readline 8.0 or later, the TUI
-SingleKey keymap will be named @samp{SingleKey}.  This can be used in
-@file{.inputrc} to add additional bindings to this keymap.
+Если @value{GDBN} был собран с помощью Readline 8.0 или новее, раскладка TUI
+SingleKey будет называться @samp{SingleKey}.  Это можно использовать в
+@file{.inputrc} для добавления дополнительных привязок к этой раскладке.
 
 @node TUI Commands
-@section TUI-specific Commands
+@section TUI-специфичные Команды
 @cindex TUI commands
 
-The TUI has specific commands to control the text windows.
-These commands are always available, even when @value{GDBN} is not in
-the TUI mode.  When @value{GDBN} is in the standard mode, most
-of these commands will automatically switch to the TUI mode.
+В TUI есть специальные команды для управления текстовыми окнами.  Эти
+команды доступны всегда, даже если @value{GDBN} не находится в режиме TUI.
+Когда @value{GDBN} находится в стандартном режиме, большинство этих команд
+автоматически переключаются в режим TUI.
 
-Note that if @value{GDBN}'s @code{stdout} is not connected to a
-terminal, or @value{GDBN} has been started with the machine interface
-interpreter (@pxref{GDB/MI, ,The @sc{gdb/mi} Interface}), most of
-these commands will fail with an error, because it would not be
-possible or desirable to enable curses window management.
+Обратите внимание, что если @value{GDBN}'s @code{stdout} не подключен к
+терминалу или @value{GDBN} был запущен с интерпретатором машинного
+интерфейса (@pxref{GDB/MI, ,The @sc{gdb/mi} Interface}), большинство этих
+команд завершится ошибкой, потому что было бы невозможно или нежелательно
+включить управление окнами curses.
 
 @table @code
 @item tui enable
 @kindex tui enable
-Activate TUI mode.  The last active TUI window layout will be used if
-TUI mode has previously been used in the current debugging session,
-otherwise a default layout is used.
+Активировать режим TUI. Последний активный макет окна TUI будет
+использоваться, если режим TUI ранее использовался в текущем сеансе отладки,
+в противном случае используется макет по умолчанию.
 
 @item tui disable
 @kindex tui disable
-Disable TUI mode, returning to the console interpreter.
+Отключить режим TUI, вернувшись в консольный интерпретатор.
 
 @item info win
 @kindex info win
-List and give the size of all displayed windows.
+Перечислить и указать размер всех отображаемых окон.
 
 @item tui new-layout @var{name} @var{window} @var{weight} @r{[}@var{window} @var{weight}@dots{}@r{]}
 @kindex tui new-layout
-Create a new TUI layout.  The new layout will be named @var{name}, and
-can be accessed using the @code{layout} command (see below).
+Создать новый макет TUI.  Новый макет будет называться @var{name}, и к нему
+можно будет получить доступ с помощью команды @code{layout} (см. Ниже).
 
-Each @var{window} parameter is either the name of a window to display,
-or a window description.  The windows will be displayed from top to
-bottom in the order listed.
+Каждый параметр @var{window} - это либо имя отображаемого окна, либо его
+описание.  Окна будут отображаться сверху вниз в указанном порядке.
 
-The names of the windows are the same as the ones given to the
-@code{focus} command (see below); additional, the @code{status}
-window can be specified.  Note that, because it is of fixed height,
-the weight assigned to the status window is of no importance.  It is
-conventional to use @samp{0} here.
+Имена окон такие же, как и у команды @code{focus} (см. Ниже); Дополнительно
+можно указать окно @code{status}.  Обратите внимание, что, поскольку оно
+имеет фиксированную высоту, вес, присвоенное окну состояние, не имеет
+значения.  Обычно здесь используется @samp{0}.
 
-A window description looks a bit like an invocation of @code{tui
-new-layout}, and is of the form
+Описание окна немного похоже на вызов @code{tui new-layout} и имеет вид
 @{@r{[}@code{-horizontal}@r{]}@var{window} @var{weight} @r{[}@var{window} @var{weight}@dots{}@r{]}@}.
 
-This specifies a sub-layout.  If @code{-horizontal} is given, the
-windows in this description will be arranged side-by-side, rather than
-top-to-bottom.
+Это определяет суб-макет.  Если задано @code{-horizontal}, окна в этом
+описании будут располагаться бок о бок, а не сверху вниз.
 
-Each @var{weight} is an integer.  It is the weight of this window
-relative to all the other windows in the layout.  These numbers are
-used to calculate how much of the screen is given to each window.
+Каждый @var{weight} является целым числом.  Это вес этого окна по отношению
+ко всем остальным окнам в макете.  Эти числа используются для расчета того,
+какая часть экрана отводится каждому окну.
 
-For example:
+Например:
 
 @example
 (gdb) tui new-layout example src 1 regs 1 status 0 cmd 1
 @end example
 
-Here, the new layout is called @samp{example}.  It shows the source
-and register windows, followed by the status window, and then finally
-the command window.  The non-status windows all have the same weight,
-so the terminal will be split into three roughly equal sections.
+Здесь новый макет называется @samp{example}.  Он отображает окна источника и
+регистра, затем окно состояния и, наконец, окно команд.  Все окна без окна
+статуса имеют одинаковый вес, поэтому терминал будет разделен на три
+примерно равные части.
 
-Here is a more complex example, showing a horizontal layout:
+Вот более сложный пример, показывающий горизонтальный макет:
 
 @example
 (gdb) tui new-layout example @{-horizontal src 1 asm 1@} 2 status 0 cmd 1
 @end example
 
-This will result in side-by-side source and assembly windows; with the
-status and command window being beneath these, filling the entire
-width of the terminal.  Because they have weight 2, the source and
-assembly windows will be twice the height of the command window.
+Это приведет к параллельному расположению окон источника и сборки; с окном
+состояния и команд под ними, заполняя всю ширину терминала.  Поскольку они
+имеют вес 2, окна исходного кода и сборки будут в два раза больше высоты
+окна команд.
 
 @item layout @var{name}
 @kindex layout
-Changes which TUI windows are displayed.  The @var{name} parameter
-controls which layout is shown.  It can be either one of the built-in
-layout names, or the name of a layout defined by the user using
-@code{tui new-layout}.
+Изменяет отображение окон TUI.  Параметр @var{name} управляет отображаемым
+макетом.  Это может быть либо одно из встроенных имен макета, либо имя
+макета, определенное пользователем с помощью @code{tui new-layout}.
 
-The built-in layouts are as follows:
+Встроенные макеты следующие:
 
 @table @code
 @item next
-Display the next layout.
+Показать следующий макет.
 
 @item prev
-Display the previous layout.
+Показать предыдущий макет.
 
 @item src
-Display the source and command windows.
+Показать окно исходного кода и окно команд.
 
 @item asm
-Display the assembly and command windows.
+Отобразите окна сборки и командного окна.
 
 @item split
-Display the source, assembly, and command windows.
+Отобразите окна исходного кода, сборки и команд.
 
 @item regs
-When in @code{src} layout display the register, source, and command
-windows.  When in @code{asm} or @code{split} layout display the
-register, assembler, and command windows.
+В макете @code{src} отображаются окна реестра, исходного кода и команд.  В
+макете @code{asm} или @code{split} отображаются окна реестра, ассемблера и
+команд.
 @end table
 
 @item focus @var{name}
 @kindex focus
-Changes which TUI window is currently active for scrolling.  The
-@var{name} parameter can be any of the following:
+Изменяет, какое окно TUI в настоящее время активно для прокрутки.  Параметр
+@var{name} может быть любым из следующих:
 
 @table @code
 @item next
-Make the next window active for scrolling.
+Сделает следующее окно активным для прокрутки.
 
 @item prev
-Make the previous window active for scrolling.
+Сделает предыдущее окно активным для прокрутки.
 
 @item src
-Make the source window active for scrolling.
+Сделает исходное окно активным для прокрутки.
 
 @item asm
-Make the assembly window active for scrolling.
+Сделает окно сборки активным для прокрутки.
 
 @item regs
-Make the register window active for scrolling.
+Сделает окно реестра активным для прокрутки.
 
 @item cmd
-Make the command window active for scrolling.
+Сделает командное окно активным для прокрутки.
 @end table
 
 @item refresh
 @kindex refresh
-Refresh the screen.  This is similar to typing @kbd{C-L}.
+Обновите экран.  Это похоже на ввод @kbd{C-L}.
 
 @item tui reg @var{group}
 @kindex tui reg
-Changes the register group displayed in the tui register window to
-@var{group}.  If the register window is not currently displayed this
-command will cause the register window to be displayed.  The list of
-register groups, as well as their order is target specific. The
-following groups are available on most targets:
+Изменяет группу регистров, отображаемую в окне регистров TUI, на
+@var{group}.  Если окно регистров в настоящее время не отображается, эта
+команда вызовет отображение окна регистров.  Список групп регистров, а также
+их порядок зависят от цели.  Для большинства целей доступны следующие
+группы:
 @table @code
 @item next
-Repeatedly selecting this group will cause the display to cycle
-through all of the available register groups.
+Повторный выбор этой группы приведет к циклическому просмотру на дисплее
+всех доступных групп регистров.
 
 @item prev
-Repeatedly selecting this group will cause the display to cycle
-through all of the available register groups in the reverse order to
-@var{next}.
+Повторный выбор этой группы приведет к тому, что будут циклическим перебором
+отображатся все доступные группы регистров в порядке, обратном @var{next}.
 
 @item general
-Display the general registers.
+Отображение общих регистров.
 @item float
-Display the floating point registers.
+Отобразите регистры с плавающей точкой.
 @item system
-Display the system registers.
+Отобразите системные регистры.
 @item vector
-Display the vector registers.
+Отобразите регистры векторов.
 @item all
-Display all registers.
+Показать все регистры.
 @end table
 
 @item update
 @kindex update
-Update the source window and the current execution point.
+Обновите исходное окно и текущую точку выполнения.
 
 @item winheight @var{name} +@var{count}
 @itemx winheight @var{name} -@var{count}
 @kindex winheight
-Change the height of the window @var{name} by @var{count}
-lines.  Positive counts increase the height, while negative counts
-decrease it.  The @var{name} parameter can be one of @code{src} (the
-source window), @code{cmd} (the command window), @code{asm} (the
-disassembly window), or @code{regs} (the register display window).
+Измените высоту окна @var{name} на количество строк @var{count}.
+Положительные значения увеличивают высоту, а отрицательные - уменьшает.
+Параметр @var{name} может быть одним из @code{src} (окно исходного кода),
+@code{cmd} (окно командного интерпретартора), @code{asm} (окно сборки) или
+@code{regs} (окно отображения реестров).
 @end table
 
 @node TUI Configuration
-@section TUI Configuration Variables
+@section Переменные конфигурации TUI
 @cindex TUI configuration variables
 
-Several configuration variables control the appearance of TUI windows.
+Несколько переменных конфигурации управляют внешним видом окон TUI.
 
 @table @code
 @item set tui border-kind @var{kind}
 @kindex set tui border-kind
-Select the border appearance for the source, assembly and register windows.
-The possible values are the following:
+Выбрать внешний вид границы для окон исходного кода, сборки и регистров.
+Возможные значения:
 @table @code
 @item space
-Use a space character to draw the border.
+Использовать пробел, чтобы нарисовать границу.
 
 @item ascii
-Use @sc{ascii} characters @samp{+}, @samp{-} and @samp{|} to draw the border.
+Использовать символы @sc{ascii} @samp{+}, @samp{-} и @samp{|} для рисования
+границы.
 
 @item acs
-Use the Alternate Character Set to draw the border.  The border is
-drawn using character line graphics if the terminal supports them.
+Используйте альтернативный набор символов, чтобы нарисовать границу.
+Граница рисуется с использованием линейной графики, если терминал это
+поддерживает.
 @end table
 
 @item set tui border-mode @var{mode}
 @kindex set tui border-mode
 @itemx set tui active-border-mode @var{mode}
 @kindex set tui active-border-mode
-Select the display attributes for the borders of the inactive windows
-or the active window.  The @var{mode} can be one of the following:
+Выбор атрибутов отображения для границ неактивных окон или активного окна.
+@var{mode} может быть одним из следующих:
 @table @code
 @item normal
-Use normal attributes to display the border.
+Использовать обычные атрибуты для отображения границы.
 
 @item standout
-Use standout mode.
+Использовать режим выделения.
 
 @item reverse
-Use reverse video mode.
+Использовать режим обратного видео.
 
 @item half
-Use half bright mode.
+Использовать режим половинной яркости.
 
 @item half-standout
-Use half bright and standout mode.
+Использовать полуяркий и режим выделения.
 
 @item bold
-Use extra bright or bold mode.
+Использовать очень яркий или жирный режим.
 
 @item bold-standout
-Use extra bright or bold and standout mode.
+Используйте режим повышенной яркости или жирности и яркости.
 @end table
 
 @item set tui tab-width @var{nchars}
 @kindex set tui tab-width
 @kindex tabset
-Set the width of tab stops to be @var{nchars} characters.  This
-setting affects the display of TAB characters in the source and
-assembly windows.
+Установить ширину позиций табуляции, чтобы она составляла @var{nchars}
+символов.  Этот параметр влияет на отображение символов TAB в окнах
+исходного кода и сборки.
 
 @item set tui compact-source @r{[}on@r{|}off@r{]}
 @kindex set tui compact-source
-Set whether the TUI source window is displayed in ``compact'' form.
-The default display uses more space for line numbers and starts the
-source text at the next tab stop; the compact display uses only as
-much space as is needed for the line numbers in the current file, and
-only a single space to separate the line numbers from the source.
+Установить, будет ли окно исходного текста TUI отображаться в форме
+``compact''.  Отображение по умолчанию использует больше места для номеров
+строк и начинает исходный текст со следующей позиции табуляции; компактное
+отображение использует ровно столько места, сколько необходимо для номеров
+строк в текущем файле, и только один пробел для отделения номеров строк от
+текста исходного кода.
 @end table
 
-Note that the colors of the TUI borders can be controlled using the
-appropriate @code{set style} commands.  @xref{Output Styling}.
+Обратите внимание, что цветами границ TUI можно управлять с помощью
+соответствующих команд @code{set style}.  @xref{Output Styling}.
 
 @node Emacs
 @chapter Using @value{GDBN} under @sc{gnu} Emacs
